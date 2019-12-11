@@ -32,7 +32,7 @@ export default class Bob extends Component {
     const formatDate = this.convert(this.state.date.toString());
     return (
       <div className="Bob">
-        <h1> Bob</h1>
+        <h1>Bob</h1>
         <div className="Calendar">
           <Calendar onClickDay={this.handleChange} value={this.state.date} />
           <EventList
