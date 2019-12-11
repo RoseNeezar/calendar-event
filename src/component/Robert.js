@@ -27,7 +27,6 @@ export default class Robert extends Component {
   }
 
   render() {
-    const formatDate = this.convert(this.state.date.toString());
     return (
       <div className="Robert">
         {this.state.redirect && <Redirect push to="/EventForms" />}

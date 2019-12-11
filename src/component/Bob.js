@@ -29,7 +29,6 @@ export default class Bob extends Component {
   }
 
   render() {
-    const formatDate = this.convert(this.state.date.toString());
     return (
       <div className="Bob">
         <h1>Bob</h1>
