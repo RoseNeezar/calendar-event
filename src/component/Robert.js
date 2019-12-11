@@ -31,8 +31,7 @@ export default class Robert extends Component {
     return (
       <div className="Robert">
         {this.state.redirect && <Redirect push to="/EventForms" />}
-        <h1>{formatDate}</h1>
-        <h1>This bob</h1>
+        <h1>Robert</h1>
         <div className="Calendar">
           <Calendar onClickDay={this.handleChange} value={this.state.date} />
           {this.props.RobertEvents.map(ev => {
