@@ -6,7 +6,7 @@ export default class EventForms extends Component {
     super(props);
     this.state = {
       eventTitle: "",
-      dateTime: "",
+      dateTime: props.eventDate,
       location: "",
       Attendes: 0,
       AssignedTo: "Bob"
@@ -23,6 +23,7 @@ export default class EventForms extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.props.closeForm();
     this.props.addEvents(this.state);
     this.setState({
       eventTitle: "",
@@ -61,8 +62,9 @@ export default class EventForms extends Component {
                     name="dateTime"
                     value={this.state.dateTime}
                     onChange={this.handleChange}
-                    placeholder="Date and time"
+                    placeholder={this.props.eventDate}
                     className="form-control"
+                    id="date-time"
                   />
                 </div>
                 <div className="form-group">

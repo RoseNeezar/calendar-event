@@ -4,7 +4,6 @@ import "./App.css";
 import Bob from "./component/Bob";
 import About from "./component/About";
 import Robert from "./component/Robert";
-import EventForms from "./component/EventForms";
 
 export default class App extends Component {
   constructor(props) {
@@ -47,19 +46,23 @@ export default class App extends Component {
           <Route
             exact
             path="/Bob"
-            render={() => <Bob BobEvents={this.state.BobEvents} />}
+            render={() => (
+              <Bob
+                BobEvents={this.state.BobEvents}
+                addEvents={this.addEvents}
+              />
+            )}
           />
           <Route
             exact
             path="/Robert"
-            render={() => <Robert RobertEvents={this.state.RobertEvents} />}
+            render={() => (
+              <Robert
+                RobertEvents={this.state.RobertEvents}
+                addEvents={this.addEvents}
+              />
+            )}
           />
-          <Route
-            exact
-            path="/EventForms"
-            render={() => <EventForms addEvents={this.addEvents} />}
-          />
-          } />
         </Switch>
       </div>
     );

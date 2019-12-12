@@ -21,19 +21,14 @@ export default class Event extends Component {
           onClick={this.toggleAccordion}
           className="port-item p-4 bg-primary"
         >
-          <button className="btn btn-primary">{this.props.currentDate}</button>
+          <button className="btn btn-primary">{this.props.dateTime}</button>
         </div>
         <Collapse isOpen={this.state.isOpen}>
-          <div className="card" style={{ width: "18rem" }}>
-            <div className="card-header">{this.props.eventTitle}</div>
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item">Date : {this.props.dateTime}</li>
-              <li className="list-group-item">
-                Location : {this.props.location}
-              </li>
-              <li className="list-group-item">
-                Number of people : {this.props.Attendes}
-              </li>
+          <div>
+            <ul>
+              <li>{this.props.eventTitle}</li>
+              <li>Location : {this.props.location}</li>
+              <li>Number of people : {this.props.Attendes}</li>
             </ul>
           </div>
         </Collapse>

@@ -1,51 +1,44 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import React, { useState } from "react";
 import Calendar from "react-calendar";
+import "./Bob.css";
+import EventList from "./EventListRobert";
+import { convert } from "../helpers/dateFormat";
+import EventForm from "./EventForms";
 
-export default class Robert extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      date: new Date(),
-      redirect: false
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.convert = this.convert.bind(this);
-  }
+function Robert({ RobertEvents, addEvents }) {
+  Robert.defaultProps = {
+    user: "Robert"
+  };
+  const [date, setdate] = useState(new Date());
+  const [redirect, setredirect] = useState(false);
+  const [eventDate, seteventDate] = useState("");
 
-  handleChange(e) {
-    this.setState({
-      date: e,
-      redirect: true
-    });
-  }
-  convert(str) {
-    var date = new Date(str),
-      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-      day = ("0" + date.getDate()).slice(-2);
-    return [day, mnth, date.getFullYear()].join("/");
-  }
+  const handleChange = e => {
+    setdate(e);
+    setredirect(true);
+    seteventDate(convert(e));
+  };
 
-  render() {
-    return (
-      <div className="Robert">
-        {this.state.redirect && <Redirect push to="/EventForms" />}
-        <h1>Robert</h1>
+  const closeForm = () => {
+    setredirect(false);
+  };
+
+  return (
+    <div className="Robert">
+      {redirect ? (
+        <EventForm
+          closeForm={closeForm}
+          addEvents={addEvents}
+          eventDate={eventDate}
+        />
+      ) : (
         <div className="Calendar">
-          <Calendar onClickDay={this.handleChange} value={this.state.date} />
-          {this.props.RobertEvents.map(ev => {
-            return (
-              <div>
-                <h1>{ev.eventTitle}</h1>
-                <li>{ev.dateTime}</li>
-                <li>{ev.location}</li>
-                <li>{ev.Attendes}</li>
-                <li>{ev.AssignedTo}</li>
-              </div>
-            );
-          })}
+          <h1>Roberts's Event</h1>
+          <Calendar onClickDay={handleChange} value={date} />
+          <EventList RobertEvents={RobertEvents} user={Robert} />
         </div>
-      </div>
-    );
-  }
+      )}
+    </div>
+  );
 }
+export default Robert;

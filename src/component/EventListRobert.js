@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+
 import Event from "./Event";
 
 export default class EventList extends Component {
   render() {
     return (
       <div>
-        {this.props.BobEvents.map(st => {
+        {this.props.RobertEvents.map(st => {
           return (
             <Event
               eventTitle={st.eventTitle}
