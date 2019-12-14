@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from "react";
-
-import "./Bob.css";
-import EventList from "./EventList";
-import { convert } from "../helpers/dateFormat";
-import EventForm from "./EventForms";
+import "./Robert.css";
+import EventList from "../Events/EventList";
+import EventForm from "../Events/EventForms";
 
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-function Bob({
-  BobEvents,
+function Robert({
+  RobertEvents,
   addEvents,
   addCalendarEvent,
-  BobCalendarEvent,
-  user = "Bob"
+  RobertCalendarEvent,
+  user = "Robert"
 }) {
   const [redirect, setredirect] = useState(false);
-  const [eventDate, seteventDate] = useState("");
 
   const [calendarEvents, setcalendarEvents] = useState([]);
   const [start, setstart] = useState();
@@ -27,7 +24,6 @@ function Bob({
   const handleChange = e => {
     setstart(e.date);
     setallDay(true);
-    seteventDate(convert(e));
   };
 
   useEffect(() => {
@@ -48,18 +44,17 @@ function Bob({
   }, [start]);
 
   return (
-    <div className="Bob">
+    <div className="Robert">
       {redirect ? (
         <EventForm
           closeForm={closeForm}
           addEvents={addEvents}
-          eventDate={eventDate}
           addCalendarEvent={addCalendarEvent}
           calendarEvents={calendarEvents}
         />
       ) : (
         <div className="Calendar">
-          <h1>Bob's Event</h1>
+          <h1>Robert's Event</h1>
           <FullCalendar
             defaultView="dayGridMonth"
             header={{
@@ -68,13 +63,13 @@ function Bob({
               right: ""
             }}
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            events={BobCalendarEvent}
+            events={RobertCalendarEvent}
             dateClick={handleChange}
           />
-          <EventList eventsInfo={BobEvents} />
+          <EventList eventsInfo={RobertEvents} />
         </div>
       )}
     </div>
   );
 }
-export default Bob;
+export default Robert;

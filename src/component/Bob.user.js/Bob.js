@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from "react";
-import "./Robert.css";
-import EventList from "./EventList";
-import { convert } from "../helpers/dateFormat";
-import EventForm from "./EventForms";
-
+import "./Bob.css";
+import EventList from "../Events/EventList";
+import EventForm from "../Events/EventForms";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-function Robert({
-  RobertEvents,
+function Bob({
+  BobEvents,
   addEvents,
   addCalendarEvent,
-  RobertCalendarEvent,
-  user = "Robert"
+  BobCalendarEvent,
+  user = "Bob"
 }) {
   const [redirect, setredirect] = useState(false);
-  const [eventDate, seteventDate] = useState("");
 
   const [calendarEvents, setcalendarEvents] = useState([]);
   const [start, setstart] = useState();
@@ -26,7 +23,6 @@ function Robert({
   const handleChange = e => {
     setstart(e.date);
     setallDay(true);
-    seteventDate(convert(e));
   };
 
   useEffect(() => {
@@ -47,18 +43,17 @@ function Robert({
   }, [start]);
 
   return (
-    <div className="Robert">
+    <div className="Bob">
       {redirect ? (
         <EventForm
           closeForm={closeForm}
           addEvents={addEvents}
-          eventDate={eventDate}
           addCalendarEvent={addCalendarEvent}
           calendarEvents={calendarEvents}
         />
       ) : (
         <div className="Calendar">
-          <h1>Robert's Event</h1>
+          <h1>Bob's Event</h1>
           <FullCalendar
             defaultView="dayGridMonth"
             header={{
@@ -67,13 +62,13 @@ function Robert({
               right: ""
             }}
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            events={RobertCalendarEvent}
+            events={BobCalendarEvent}
             dateClick={handleChange}
           />
-          <EventList eventsInfo={RobertEvents} />
+          <EventList eventsInfo={BobEvents} />
         </div>
       )}
     </div>
   );
 }
-export default Robert;
+export default Bob;
