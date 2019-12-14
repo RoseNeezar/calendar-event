@@ -17,10 +17,7 @@ export default class About extends Component {
             events will be displayed on either bob or robert depending on the
             selected option
           </li>
-          <li className="float-left block">
-            current state need to manually click back the component name to go
-            back to bob or robert from form
-          </li>
+
           <li className="float-left block">need to add better styling</li>
         </ul>
       </div>
