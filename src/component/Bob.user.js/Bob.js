@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Bob.css";
-import EventList from "../Events/EventList";
 import EventForm from "../Events/EventForms";
+import EventPopUp from "../EventsPopUp/EventPopUp";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -19,6 +19,13 @@ function Bob({
   const [calendarEvents, setcalendarEvents] = useState([]);
   const [start, setstart] = useState();
   const [allDay, setallDay] = useState(true);
+  const [openPopEvent, setopenPopEvent] = useState(false);
+  const [popEvent, setpopEvent] = useState("");
+
+  const handlePopEvent = e => {
+    setopenPopEvent(!openPopEvent);
+    setpopEvent(e.event.title);
+  };
 
   const handleChange = e => {
     setstart(e.date);
@@ -64,8 +71,13 @@ function Bob({
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             events={BobCalendarEvent}
             dateClick={handleChange}
+            eventClick={handlePopEvent}
           />
-          <EventList eventsInfo={BobEvents} />
+          <EventPopUp
+            openPopEvent={openPopEvent}
+            eventsInfo={BobEvents}
+            popEvent={popEvent}
+          />
         </div>
       )}
     </div>

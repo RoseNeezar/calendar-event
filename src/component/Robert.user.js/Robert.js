@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Robert.css";
-import EventList from "../Events/EventList";
 import EventForm from "../Events/EventForms";
-
+import EventPopUp from "../EventsPopUp/EventPopUp";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -20,6 +19,13 @@ function Robert({
   const [calendarEvents, setcalendarEvents] = useState([]);
   const [start, setstart] = useState();
   const [allDay, setallDay] = useState(true);
+  const [openPopEvent, setopenPopEvent] = useState(false);
+  const [popEvent, setpopEvent] = useState("");
+
+  const handlePopEvent = e => {
+    setopenPopEvent(!openPopEvent);
+    setpopEvent(e.event.title);
+  };
 
   const handleChange = e => {
     setstart(e.date);
@@ -65,8 +71,14 @@ function Robert({
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             events={RobertCalendarEvent}
             dateClick={handleChange}
+            eventClick={handlePopEvent}
           />
-          <EventList eventsInfo={RobertEvents} />
+
+          <EventPopUp
+            openPopEvent={openPopEvent}
+            eventsInfo={RobertEvents}
+            popEvent={popEvent}
+          />
         </div>
       )}
     </div>
