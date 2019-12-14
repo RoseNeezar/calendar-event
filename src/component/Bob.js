@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Calendar from "react-calendar";
+
 import "./Bob.css";
 import EventList from "./EventList";
 import { convert } from "../helpers/dateFormat";
