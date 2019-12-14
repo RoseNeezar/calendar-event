@@ -10,9 +10,27 @@ export default class App extends Component {
     super(props);
     this.state = {
       BobEvents: [],
-      RobertEvents: []
+      RobertEvents: [],
+      BobCalendarEvent: [],
+      RobertCalendarEvent: []
     };
     this.addEvents = this.addEvents.bind(this);
+    this.addCalendarEvent = this.addCalendarEvent.bind(this);
+  }
+
+  addCalendarEvent(newCalendarEvent) {
+    if (newCalendarEvent.AssignedTo === "Bob") {
+      this.setState({
+        BobCalendarEvent: [...this.state.BobCalendarEvent, newCalendarEvent]
+      });
+    } else {
+      this.setState({
+        RobertCalendarEvent: [
+          ...this.state.RobertCalendarEvent,
+          newCalendarEvent
+        ]
+      });
+    }
   }
 
   addEvents(newEvent) {
@@ -50,6 +68,8 @@ export default class App extends Component {
               <Bob
                 BobEvents={this.state.BobEvents}
                 addEvents={this.addEvents}
+                BobCalendarEvent={this.state.BobCalendarEvent}
+                addCalendarEvent={this.addCalendarEvent}
               />
             )}
           />
@@ -60,6 +80,8 @@ export default class App extends Component {
               <Robert
                 RobertEvents={this.state.RobertEvents}
                 addEvents={this.addEvents}
+                RobertCalendarEvent={this.state.RobertCalendarEvent}
+                addCalendarEvent={this.addCalendarEvent}
               />
             )}
           />

@@ -5,7 +5,7 @@ export default class EventList extends Component {
   render() {
     return (
       <div>
-        {this.props.BobEvents.map(st => {
+        {this.props.eventsInfo.map(st => {
           return (
             <Event
               eventTitle={st.eventTitle}

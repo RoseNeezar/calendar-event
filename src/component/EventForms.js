@@ -25,6 +25,9 @@ export default class EventForms extends Component {
     e.preventDefault();
     this.props.closeForm();
     this.props.addEvents(this.state);
+    this.props.calendarEvents.title = this.state.eventTitle;
+    this.props.calendarEvents.AssignedTo = this.state.AssignedTo;
+    this.props.addCalendarEvent(this.props.calendarEvents);
     this.setState({
       eventTitle: "",
       dateTime: "",
@@ -62,7 +65,7 @@ export default class EventForms extends Component {
                     name="dateTime"
                     value={this.state.dateTime}
                     onChange={this.handleChange}
-                    placeholder={this.props.eventDate}
+                    placeholder="date and time"
                     className="form-control"
                     id="date-time"
                   />

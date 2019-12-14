@@ -1,27 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "./Bob.css";
 import EventList from "./EventList";
 import { convert } from "../helpers/dateFormat";
 import EventForm from "./EventForms";
 
-function Bob({ BobEvents, addEvents }) {
-  Bob.defaultProps = {
-    user: "Bob"
-  };
-  const [date, setdate] = useState(new Date());
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
+
+function Bob({
+  BobEvents,
+  addEvents,
+  addCalendarEvent,
+  BobCalendarEvent,
+  user = "Bob"
+}) {
   const [redirect, setredirect] = useState(false);
   const [eventDate, seteventDate] = useState("");
 
+  const [calendarEvents, setcalendarEvents] = useState([]);
+  const [start, setstart] = useState();
+  const [allDay, setallDay] = useState(true);
+
   const handleChange = e => {
-    setdate(e);
-    setredirect(true);
+    setstart(e.date);
+    setallDay(true);
     seteventDate(convert(e));
   };
+
+  useEffect(() => {
+    return () => {
+      setredirect(true);
+    };
+  }, [start]);
 
   const closeForm = () => {
     setredirect(false);
   };
+
+  useEffect(() => {
+    const calendarSetter = () => {
+      return setcalendarEvents({ start, allDay, user });
+    };
+    calendarSetter();
+  }, [start]);
 
   return (
     <div className="Bob">
@@ -30,12 +54,24 @@ function Bob({ BobEvents, addEvents }) {
           closeForm={closeForm}
           addEvents={addEvents}
           eventDate={eventDate}
+          addCalendarEvent={addCalendarEvent}
+          calendarEvents={calendarEvents}
         />
       ) : (
         <div className="Calendar">
           <h1>Bob's Event</h1>
-          <Calendar onClickDay={handleChange} value={date} />
-          <EventList BobEvents={BobEvents} user={Bob} />
+          <FullCalendar
+            defaultView="dayGridMonth"
+            header={{
+              left: "prev,next today",
+              center: "title",
+              right: ""
+            }}
+            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+            events={BobCalendarEvent}
+            dateClick={handleChange}
+          />
+          <EventList eventsInfo={BobEvents} />
         </div>
       )}
     </div>

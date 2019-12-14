@@ -21,7 +21,7 @@ export default class Event extends Component {
           onClick={this.toggleAccordion}
           className="port-item p-4 bg-primary"
         >
-          <button className="btn btn-primary">{this.props.dateTime}</button>
+          <button className="btn btn-primary">{this.props.eventTitle}</button>
         </div>
         <Collapse isOpen={this.state.isOpen}>
           <div>
