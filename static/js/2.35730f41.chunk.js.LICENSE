@@ -19,6 +19,14 @@ See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
 
+/**
+ * A better abstraction over CSS.
+ *
+ * @copyright Oleg Isonen (Slobodskoi) / Isonen 2014-present
+ * @website https://github.com/cssinjs/jss
+ * @license MIT
+ */
+
 /*!
 FullCalendar Day Grid Plugin v4.3.0
 Docs & License: https://fullcalendar.io/
@@ -35,12 +43,6 @@ Docs & License: https://fullcalendar.io/
 object-assign
 (c) Sindre Sorhus
 @license MIT
-*/
-
-/*!
-  Copyright (c) 2017 Jed Watson.
-  Licensed under the MIT License (MIT), see
-  http://jedwatson.github.io/classnames
 */
 
 /** @license React v16.12.0
