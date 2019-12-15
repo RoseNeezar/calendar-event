@@ -13,4 +13,4 @@ based on certain criteria namely, event title, data time, location, number of pe
 
 Demo here: https://roseneezar.github.io/calendar-event/#/
 
-<a href="https://imgflip.com/gif/3jihr9"><img src="https://i.imgflip.com/3jihr9.gif" title="made at imgflip.com"/></a>
+<a href="https://imgflip.com/gif/3jiht1"><img src="https://i.imgflip.com/3jiht1.gif" title="made at imgflip.com"/></a>
