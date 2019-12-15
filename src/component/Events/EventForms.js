@@ -67,7 +67,7 @@ function EventForms({
               name="location"
               value={location}
               onChange={setlocation}
-              placeholder="MSU Campus"
+              placeholder="Hall 5"
               className="form-control"
             />
           </div>
