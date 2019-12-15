@@ -2,10 +2,21 @@ import React, { useState, useEffect } from "react";
 import "./Robert.css";
 import EventForm from "../Events/EventForms";
 import EventPopUp from "../EventsPopUp/EventPopUp";
+import Paper from "@material-ui/core/Paper";
+import Card from "@material-ui/core/Card";
+import Grid from "@material-ui/core/Grid";
+import CardContent from "@material-ui/core/CardContent";
+import { makeStyles } from "@material-ui/core/styles";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+
+const useStyles = makeStyles(theme => ({
+  card: {
+    maxWidth: 1000
+  }
+}));
 
 function Robert({
   RobertEvents,
@@ -49,39 +60,58 @@ function Robert({
     calendarSetter();
   }, [start]);
 
-  return (
-    <div className="Robert">
-      {redirect ? (
-        <EventForm
-          closeForm={closeForm}
-          addEvents={addEvents}
-          addCalendarEvent={addCalendarEvent}
-          calendarEvents={calendarEvents}
-        />
-      ) : (
-        <div className="Calendar">
-          <h1>Robert's Event</h1>
-          <FullCalendar
-            defaultView="dayGridMonth"
-            header={{
-              left: "prev,next today",
-              center: "title",
-              right: ""
-            }}
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            events={RobertCalendarEvent}
-            dateClick={handleChange}
-            eventClick={handlePopEvent}
-          />
+  const classes = useStyles();
 
-          <EventPopUp
-            openPopEvent={openPopEvent}
-            eventsInfo={RobertEvents}
-            popEvent={popEvent}
+  return (
+    <Paper
+      style={{
+        padding: 0,
+        margin: 0,
+        height: "100vh"
+      }}
+      elevation={0}
+    >
+      <Grid
+        container
+        justify="center"
+        style={{
+          marginTop: "3rem"
+        }}
+      >
+        {redirect ? (
+          <EventForm
+            closeForm={closeForm}
+            addEvents={addEvents}
+            addCalendarEvent={addCalendarEvent}
+            calendarEvents={calendarEvents}
           />
-        </div>
-      )}
-    </div>
+        ) : (
+          <Card className={classes.card}>
+            <CardContent>
+              <h1>Robert's Event</h1>
+              <FullCalendar
+                defaultView="dayGridMonth"
+                header={{
+                  left: "prev,next today",
+                  center: "title",
+                  right: ""
+                }}
+                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                events={RobertCalendarEvent}
+                dateClick={handleChange}
+                eventClick={handlePopEvent}
+              />
+
+              <EventPopUp
+                openPopEvent={openPopEvent}
+                eventsInfo={RobertEvents}
+                popEvent={popEvent}
+              />
+            </CardContent>
+          </Card>
+        )}
+      </Grid>
+    </Paper>
   );
 }
 export default Robert;
