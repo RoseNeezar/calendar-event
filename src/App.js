@@ -11,10 +11,14 @@ import MenuIcon from "@material-ui/icons/Menu";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Drawer from "@material-ui/core/Drawer";
 import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
+import InfoIcon from "@material-ui/icons/Info";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { makeStyles } from "@material-ui/core/styles";
+import "./App.css";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,11 +40,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function App() {
+  //Bob/RobertEvents holds list of events for each user
+  //Bob/RobertCalendarEvents holds variables need on the calendar
   const [BobEvents, setBobEvents] = useState([]);
   const [RobertEvents, setRobertEvents] = useState([]);
   const [BobCalendarEvent, setBobCalendarEvent] = useState([]);
   const [RobertCalendarEvent, setRobertCalendarEvent] = useState([]);
 
+  //add user events and marking on calendar
   const addCalendarEvent = newCalendarEvent => {
     let calendarItems = { ...newCalendarEvent, id: uuid() };
     if (newCalendarEvent.AssignedTo === "Bob") {
@@ -50,6 +57,7 @@ function App() {
     }
   };
 
+  //add new events to user that will be displayed as a pop up
   const addEvents = newEvent => {
     let eventItem = { ...newEvent, id: uuid() };
     if (newEvent.AssignedTo === "Bob") {
@@ -62,7 +70,7 @@ function App() {
   const [state, setState] = React.useState({
     left: false
   });
-
+  // open side drawer for navigation
   const toggleDrawer = (side, open) => event => {
     if (
       event.type === "keydown" &&
@@ -73,6 +81,7 @@ function App() {
     setState({ ...state, [side]: open });
   };
 
+  //items inside the side drawer
   const sideList = side => (
     <div
       className={classes.list}
@@ -82,14 +91,29 @@ function App() {
     >
       <List>
         <>
-          <ListItem key={"about"} exact="true" component={Link} to="/">
+          <ListItem button key={"about"} exact="true" component={Link} to="/">
+            <ListItemIcon>
+              <InfoIcon />
+            </ListItemIcon>
             <ListItemText primary={"About"} />
           </ListItem>
           <Divider />
-          <ListItem key={"Bob"} exact="true" component={Link} to="/Bob">
+          <ListItem button key={"Bob"} exact="true" component={Link} to="/Bob">
+            <ListItemIcon>
+              <AccountCircleIcon />
+            </ListItemIcon>
             <ListItemText primary={"Bob"} />
           </ListItem>
-          <ListItem key={"Robert"} exact="true" component={Link} to="/Robert">
+          <ListItem
+            button
+            key={"Robert"}
+            exact="true"
+            component={Link}
+            to="/Robert"
+          >
+            <ListItemIcon>
+              <AccountCircleIcon />
+            </ListItemIcon>
             <ListItemText primary={"Robert"} />
           </ListItem>
         </>

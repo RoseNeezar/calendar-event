@@ -13,10 +13,11 @@ import interactionPlugin from "@fullcalendar/interaction";
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 1000
+    maxWidth: 1000,
+    overflow: "hidden"
   }
 }));
-
+//comment on method same as in Robert component, I commented in Robert Component
 function Bob({
   BobEvents,
   addEvents,

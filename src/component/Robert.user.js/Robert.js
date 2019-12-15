@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./Robert.css";
 import EventForm from "../Events/EventForms";
 import EventPopUp from "../EventsPopUp/EventPopUp";
 import Paper from "@material-ui/core/Paper";
@@ -14,10 +13,11 @@ import interactionPlugin from "@fullcalendar/interaction";
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 1000
+    maxWidth: 1000,
+    overflow: "hidden"
   }
 }));
-
+//method used in the Bob component is the same just change Robert to Bob thats all
 function Robert({
   RobertEvents,
   addEvents,
@@ -33,26 +33,32 @@ function Robert({
   const [openPopEvent, setopenPopEvent] = useState(false);
   const [popEvent, setpopEvent] = useState("");
 
+  //method to open the popup list which shows the events description like location and such
+  //it also set the event title for the popup list
   const handlePopEvent = e => {
     setopenPopEvent(!openPopEvent);
     setpopEvent(e.event.title);
   };
-
+  //method to handle 2 variables needed for calendar to mark an event set on a date
+  //title=set in formEvent, start=start date and allDay=true/false variable is needed
   const handleChange = e => {
     setstart(e.date);
     setallDay(true);
   };
 
+  //method to open and close the formEvent component, its based on 'start' variable which fire when user click on the calendar date
   useEffect(() => {
     return () => {
       setredirect(true);
     };
   }, [start]);
 
+  //method to close the eventForm
   const closeForm = () => {
     setredirect(false);
   };
 
+  //method to group the variables together to form an event
   useEffect(() => {
     const calendarSetter = () => {
       return setcalendarEvents({ start, allDay, user });
@@ -92,7 +98,7 @@ function Robert({
               <FullCalendar
                 defaultView="dayGridMonth"
                 header={{
-                  left: "prev,next today",
+                  left: "prev,next ",
                   center: "title",
                   right: ""
                 }}
@@ -101,7 +107,6 @@ function Robert({
                 dateClick={handleChange}
                 eventClick={handlePopEvent}
               />
-
               <EventPopUp
                 openPopEvent={openPopEvent}
                 eventsInfo={RobertEvents}
